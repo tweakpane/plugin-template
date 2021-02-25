@@ -5,17 +5,17 @@
   "main": "dist/tweakpane-plugin-template.js",
   "author": "cocopon",
   "license": "MIT",
-	"files": [
-		"dist"
-	],
+  "files": [
+    "dist"
+  ],
   "scripts": {
-		"prepare": "run-s clean build",
-		"prepublishOnly": "npm test",
+    "prepare": "run-s clean build",
+    "prepublishOnly": "npm test",
     "start": "npm run watch",
     "test": "eslint --ext .ts 'src/ts/**/*.ts'",
-		"assets": "run-s build assets:zip",
-		"assets:zip": "zip -j -r $(cat package.json | npx json name)-$(cat package.json | npx json version).zip dist",
-		"clean": "rm -rf dist *.tgz *.zip",
+    "assets": "run-s build assets:zip",
+    "assets:zip": "zip -j -r $(cat package.json | npx json name)-$(cat package.json | npx json version).zip dist",
+    "clean": "rm -rf dist *.tgz *.zip",
     "build": "run-p build:*",
     "build:dev": "rollup --config rollup.config.js",
     "build:prod": "rollup --config rollup.config.js --environment BUILD:production",
