@@ -7,11 +7,11 @@ interface Config {
 	value: Value<number>;
 }
 
-// Create a class name generator from the view name.
-// 'tmp' will generate a CSS class name like `tp-tmpv`.
+// Create a class name generator from the view name
+// ClassName('tmp') will generate a CSS class name like `tp-tmpv`
 const className = ClassName('tmp');
 
-// Custom view class should implement `ValueView` interface.
+// Custom view class should implement `ValueView` interface
 export class PluginView implements ValueView<number> {
 	public readonly element: HTMLElement;
 	public readonly value: Value<number>;
@@ -37,7 +37,7 @@ export class PluginView implements ValueView<number> {
 		this.update();
 	}
 
-	// Use this method to apply the current value to the view.
+	// Use this method to apply the current value to the view
 	public update(): void {
 		const rawValue = this.value.rawValue;
 

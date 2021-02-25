@@ -11,11 +11,11 @@ import {
 import {PluginController} from './controller';
 
 {
-	// You can see JSDoc comments of `InputBindingPlugin` for more details about each property
+	// NOTE: You can see JSDoc comments of `InputBindingPlugin` for more details about each property
 	const plugin: InputBindingPlugin<number, number> = {
 		id: 'input-template',
 
-		// This plugin template injects a compiled CSS by @rollup/plugin-replace.
+		// This plugin template injects a compiled CSS by @rollup/plugin-replace
 		// See rollup.config.js for details
 		css: '__css__',
 

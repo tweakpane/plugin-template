@@ -12,7 +12,7 @@ interface Config {
 	value: Value<number>;
 }
 
-// Custom controller class should implement `ValueController` interface.
+// Custom controller class should implement `ValueController` interface
 export class PluginController implements ValueController<number> {
 	public readonly value: Value<number>;
 	public readonly view: PluginView;
@@ -28,7 +28,7 @@ export class PluginController implements ValueController<number> {
 			value: this.value,
 		});
 
-		// You can use `PointerHandler` to handle pointer events in the same way as Tweakpane do.
+		// You can use `PointerHandler` to handle pointer events in the same way as Tweakpane do
 		const ptHandler = new PointerHandler(this.view.element);
 		ptHandler.emitter.on('down', this.onPoint_);
 		ptHandler.emitter.on('move', this.onPoint_);
