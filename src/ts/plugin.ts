@@ -11,7 +11,12 @@ import {
 import {PluginController} from './controller';
 
 {
-	// NOTE: You can see JSDoc comments of `InputBindingPlugin` for more details about each property
+	// NOTE: You can see JSDoc comments of `InputBindingPlugin` for details about each property
+	//
+	// `InputBindingPlugin<In, Ex>` means...
+	// - The plugin receives the bound value as `Ex`,
+	// - converts `Ex` into `In` and holds it
+	//
 	const plugin: InputBindingPlugin<number, number> = {
 		id: 'input-template',
 
@@ -19,20 +24,27 @@ import {PluginController} from './controller';
 		// See rollup.config.js for details
 		css: '__css__',
 
+		accept(exValue: unknown, params: InputParams) {
+			if (typeof exValue !== 'number') {
+				// Return null to deny the user input
+				return null;
+			}
+
+			// `view` option may be useful to provide a custom control for primitive values
+			if (params.view !== 'dots') {
+				return null;
+			}
+
+			// Return a typed value to accept the user input
+			return exValue;
+		},
+
 		binding: {
-			accept(exValue: unknown, params: InputParams) {
-				if (typeof exValue !== 'number') {
-					// Return null to deny the user input
-					return null;
-				}
-
-				// `view` option may be useful to provide a custom control for primitive values
-				if (params.view !== 'dots') {
-					return null;
-				}
-
-				// Return a typed value to accept the input
-				return exValue;
+			reader(_args) {
+				return (exValue: unknown): number => {
+					// Convert an external unknown value into the internal value
+					return typeof exValue === 'number' ? exValue : 0;
+				};
 			},
 
 			constraint(args) {
@@ -51,11 +63,10 @@ import {PluginController} from './controller';
 				return new CompositeConstraint(constraints);
 			},
 
-			reader(_args) {
-				return (exValue: unknown): number => {
-					// Convert an external unknown value into the internal value
-					return typeof exValue === 'number' ? exValue : 0;
-				};
+			equals: (inValue1: number, inValue2: number) => {
+				// Simply use `===` to compare primitive values,
+				// or a custom comparator for complex objects
+				return inValue1 === inValue2;
 			},
 
 			writer(_args) {
