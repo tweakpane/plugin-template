@@ -4,7 +4,7 @@ import Autoprefixer from 'autoprefixer';
 import NodeSass from 'node-sass';
 import Postcss from 'postcss';
 import Cleanup from 'rollup-plugin-cleanup';
-import { terser as Terser } from 'rollup-plugin-terser';
+import {terser as Terser} from 'rollup-plugin-terser';
 
 async function compileCss() {
 	const css = NodeSass.renderSync({
@@ -23,7 +23,7 @@ function getPlugins(css, shouldMinify) {
 		// NOTE: `paths` should be set to avoid unexpected type confliction
 		// https://github.com/Microsoft/typescript/issues/6496
 		Typescript({
-			tsconfig: 'src/ts/tsconfig.json',
+			tsconfig: 'src/tsconfig.json',
 		}),
 		Replace({
 			__css__: css,
@@ -48,7 +48,7 @@ export default async () => {
 
 	const css = await compileCss();
 	return {
-		input: 'src/ts/plugin.ts',
+		input: 'src/plugin.ts',
 		external: ['tweakpane'],
 		output: {
 			file: `dist/tweakpane-plugin-template${postfix}.js`,

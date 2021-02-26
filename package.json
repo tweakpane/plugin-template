@@ -12,7 +12,7 @@
     "prepare": "run-s clean build",
     "prepublishOnly": "npm test",
     "start": "npm run watch",
-    "test": "eslint --ext .ts 'src/ts/**/*.ts'",
+    "test": "eslint --ext .ts 'src/**/*.ts'",
     "assets": "run-s build assets:zip",
     "assets:zip": "zip -j -r $(cat package.json | npx json name)-$(cat package.json | npx json version).zip dist",
     "clean": "rm -rf dist *.tgz *.zip",
@@ -21,7 +21,7 @@
     "build:prod": "rollup --config rollup.config.js --environment BUILD:production",
     "format": "run-p format:*",
     "format:scss": "prettier --parser scss --write 'src/sass/**/*.scss'",
-    "format:ts": "eslint --ext .ts --fix 'src/ts/**/*.ts'",
+    "format:ts": "eslint --ext .ts --fix 'src/**/*.ts'",
     "watch": "run-p watch:*",
     "watch:sass": "onchange 'src/sass/**/*.scss' -- npm run build:dev",
     "watch:ts": "rollup --config rollup.config.js --watch"
