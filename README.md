@@ -19,14 +19,13 @@ This is a plugin template of an input binding for [Tweakpane][tweakpane].
 ## File structure
 ```
 |- src
-|  |- sass ............... Plugin CSS
-|  `- ts
-|     |- plugin.ts ....... Entrypoint
-|     |- controller.ts ... Controller for the custom view
-|     `- view.ts ......... Custom view
-|- dist .................. Compiled files
+|  |- sass ............ Plugin CSS
+|  |- plugin.ts ....... Entrypoint
+|  |- controller.ts ... Controller for the custom view
+|  `- view.ts ......... Custom view
+|- dist ............... Compiled files
 `- test
-   `- browser.html ....... Plugin labo
+   `- browser.html .... Plugin labo
 ```
 
 ## Plugin registration
