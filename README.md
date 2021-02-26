@@ -11,7 +11,7 @@ This is a plugin template of an input binding for [Tweakpane][tweakpane].
   ```
 - Build source codes and watch changes:
   ```
-  % npm run build
+  % npm start
   ```
 - Open `test/browser.html` to see the result.
 
