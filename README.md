@@ -1,8 +1,6 @@
 # Tweakpane plugin template
 This is a plugin template of an input binding for [Tweakpane][tweakpane].
 
-**:warning: Still under development, please wait for the next major version of Tweakpane**
-
 
 ## Quick start
 - Install dependencies:
