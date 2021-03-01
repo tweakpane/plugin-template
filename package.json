@@ -23,9 +23,9 @@
     "format": "run-p format:*",
     "format:scss": "prettier --parser scss --write 'src/sass/**/*.scss'",
     "format:ts": "eslint --ext .ts --fix 'src/**/*.ts'",
-    "watch": "run-p watch:*",
+    "watch": "npm run build:dev && run-p watch:*",
     "watch:sass": "onchange 'src/sass/**/*.scss' -- npm run build:dev",
-    "watch:ts": "rollup --config rollup.config.js --watch"
+    "watch:ts": "onchange 'src/**/*.ts' -- rollup --config rollup.config.js"
   },
   "devDependencies": {
     "@rollup/plugin-replace": "^2.4.1",
