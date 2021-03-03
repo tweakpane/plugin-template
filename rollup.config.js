@@ -6,6 +6,8 @@ import Postcss from 'postcss';
 import Cleanup from 'rollup-plugin-cleanup';
 import {terser as Terser} from 'rollup-plugin-terser';
 
+import Package from './package.json';
+
 async function compileCss() {
 	const css = NodeSass.renderSync({
 		file: 'src/sass/plugin.scss',
@@ -42,6 +44,13 @@ function getPlugins(css, shouldMinify) {
 	];
 }
 
+function getUmdName(packageName) {
+	return packageName
+		.split('-')
+		.map((comp) => comp.charAt(0).toUpperCase() + comp.slice(1))
+		.join('');
+}
+
 export default async () => {
 	const production = process.env.BUILD === 'production';
 	const postfix = production ? '.min' : '';
@@ -51,12 +60,12 @@ export default async () => {
 		input: 'src/plugin.ts',
 		external: ['tweakpane'],
 		output: {
-			file: `dist/tweakpane-plugin-template${postfix}.js`,
+			file: `dist/${Package.name}${postfix}.js`,
 			format: 'umd',
 			globals: {
 				tweakpane: 'Tweakpane',
 			},
-			name: 'TweakpanePluginTemplate',
+			name: getUmdName(Package.name),
 		},
 		plugins: getPlugins(css, production),
 
