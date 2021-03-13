@@ -36,10 +36,15 @@ export class PluginController implements ValueController<number> {
 	}
 
 	private onPoint_(ev: PointerHandlerEvent) {
-		// Update the value by user input
 		const data = ev.data;
-		const dx = constrainRange(data.x / data.bounds.width + 0.05, 0, 1) * 10;
-		const dy = data.y / 10;
+		if (!data.point) {
+			return;
+		}
+
+		// Update the value by user input
+		const dx =
+			constrainRange(data.point.x / data.bounds.width + 0.05, 0, 1) * 10;
+		const dy = data.point.y / 10;
 		this.value.rawValue = Math.floor(dy) * 10 + dx;
 	}
 }
