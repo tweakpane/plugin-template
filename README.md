@@ -1,5 +1,5 @@
 # Tweakpane plugin template
-This is a plugin template of an input binding for [Tweakpane][tweakpane].
+Plugin template of an input binding for [Tweakpane][tweakpane].
 
 
 # For plugin developers
@@ -22,7 +22,8 @@ TODO: Delete this section before publishing your plugin.
 ```
 |- src
 |  |- sass ............ Plugin CSS
-|  |- plugin.ts ....... Entrypoint
+|  |- index.ts ........ Entrypoint
+|  |- plugin.ts ....... Plugin
 |  |- controller.ts ... Controller for the custom view
 |  `- view.ts ......... Custom view
 |- dist ............... Compiled files
