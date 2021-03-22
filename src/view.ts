@@ -1,7 +1,7 @@
 import {Value} from 'tweakpane/lib/plugin/common/model/value';
 import {mapRange} from 'tweakpane/lib/plugin/common/number-util';
 import {ClassName} from 'tweakpane/lib/plugin/common/view/class-name';
-import {ValueView} from 'tweakpane/lib/plugin/common/view/value';
+import {View} from 'tweakpane/lib/plugin/common/view/view';
 
 interface Config {
 	value: Value<number>;
@@ -11,10 +11,10 @@ interface Config {
 // ClassName('tmp') will generate a CSS class name like `tp-tmpv`
 const className = ClassName('tmp');
 
-// Custom view class should implement `ValueView` interface
-export class PluginView implements ValueView<number> {
+// Custom view class should implement `View` interface
+export class PluginView implements View {
 	public readonly element: HTMLElement;
-	public readonly value: Value<number>;
+	private value_: Value<number>;
 	private dotElems_: HTMLElement[] = [];
 	private textElem_: HTMLElement;
 
@@ -24,9 +24,9 @@ export class PluginView implements ValueView<number> {
 		this.element.classList.add(className());
 
 		// Receive the bound value from the controller
-		this.value = config.value;
+		this.value_ = config.value;
 		// Handle 'change' event of the value
-		this.value.emitter.on('change', this.onValueChange_.bind(this));
+		this.value_.emitter.on('change', this.onValueChange_.bind(this));
 
 		// Create child elements
 		this.textElem_ = doc.createElement('div');
@@ -39,7 +39,7 @@ export class PluginView implements ValueView<number> {
 
 	// Use this method to apply the current value to the view
 	public update(): void {
-		const rawValue = this.value.rawValue;
+		const rawValue = this.value_.rawValue;
 
 		this.textElem_.textContent = rawValue.toFixed(2);
 
@@ -68,6 +68,11 @@ export class PluginView implements ValueView<number> {
 			this.dotElems_.push(dotElem);
 			this.element.appendChild(dotElem);
 		}
+	}
+
+	public onDispose() {
+		// Called when the view is disposing
+		console.log('TODO: dispose view');
 	}
 
 	private onValueChange_() {

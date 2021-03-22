@@ -35,6 +35,11 @@ export class PluginController implements ValueController<number> {
 		ptHandler.emitter.on('up', this.onPoint_);
 	}
 
+	public onDispose() {
+		// Called when the controller is disposing
+		console.log('TODO: dispose controller');
+	}
+
 	private onPoint_(ev: PointerHandlerEvent) {
 		const data = ev.data;
 		if (!data.point) {
