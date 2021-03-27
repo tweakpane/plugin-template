@@ -15,6 +15,10 @@
 	overflow: hidden;
 	position: relative;
 
+	&.#{$prefix}-v-disabled {
+		opacity: 0.5;
+	}
+
 	&_text {
 		// You can use CSS variables for styling. See `RootView` declarations for details:
 		// ../../node_modules/tweakpane/lib/sass/view/_root.scss

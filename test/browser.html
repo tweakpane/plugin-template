@@ -11,10 +11,10 @@
 		const params = {
 			prop: 3,
 		};
-		const pane = new Tweakpane();
+		window.pane = new Tweakpane();
 
 		// TODO: Update parameters for your plugin
-		pane.addInput({test: 3}, 'test', {
+		window.input = window.pane.addInput({test: 3}, 'test', {
 			view: 'dots',
 		}).on('change', (ev) => {
 			console.log(ev.value);

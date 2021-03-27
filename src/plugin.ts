@@ -80,6 +80,7 @@ export const TemplateInputPlugin: InputBindingPlugin<number, number> = {
 		// Create a controller for the plugin
 		return new PluginController(args.document, {
 			value: args.value,
+			viewProps: args.viewProps,
 		});
 	},
 };

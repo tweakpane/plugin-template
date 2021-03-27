@@ -1,10 +1,13 @@
 import {Value} from 'tweakpane/lib/plugin/common/model/value';
+import {ViewProps} from 'tweakpane/lib/plugin/common/model/view-props';
 import {mapRange} from 'tweakpane/lib/plugin/common/number-util';
 import {ClassName} from 'tweakpane/lib/plugin/common/view/class-name';
+import {bindViewProps} from 'tweakpane/lib/plugin/common/view/reactive';
 import {View} from 'tweakpane/lib/plugin/common/view/view';
 
 interface Config {
 	value: Value<number>;
+	viewProps: ViewProps;
 }
 
 // Create a class name generator from the view name
@@ -22,6 +25,8 @@ export class PluginView implements View {
 		// Create a root element for the plugin
 		this.element = doc.createElement('div');
 		this.element.classList.add(className());
+		// Bind view props to the element
+		bindViewProps(config.viewProps, this.element);
 
 		// Receive the bound value from the controller
 		this.value_ = config.value;
