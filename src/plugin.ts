@@ -1,11 +1,11 @@
-import {InputParams} from 'tweakpane/lib/api/types';
-import {BindingTarget} from 'tweakpane/lib/plugin/common/binding/target';
-import {CompositeConstraint} from 'tweakpane/lib/plugin/common/constraint/composite';
-import {InputBindingPlugin} from 'tweakpane/lib/plugin/input-binding';
+import {InputParams} from 'tweakpane/lib/blade/common/api/types';
+import {BindingTarget} from 'tweakpane/lib/common/binding/target';
+import {CompositeConstraint} from 'tweakpane/lib/common/constraint/composite';
 import {
 	createRangeConstraint,
 	createStepConstraint,
-} from 'tweakpane/lib/plugin/input-bindings/number/plugin';
+} from 'tweakpane/lib/input-binding/number/plugin';
+import {InputBindingPlugin} from 'tweakpane/lib/input-binding/plugin';
 
 import {PluginController} from './controller';
 

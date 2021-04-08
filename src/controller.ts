@@ -1,11 +1,11 @@
-import {ValueController} from 'tweakpane/lib/plugin/common/controller/value';
-import {Value} from 'tweakpane/lib/plugin/common/model/value';
-import {ViewProps} from 'tweakpane/lib/plugin/common/model/view-props';
-import {constrainRange} from 'tweakpane/lib/plugin/common/number-util';
+import {ValueController} from 'tweakpane/lib/common/controller/value';
+import {Value} from 'tweakpane/lib/common/model/value';
+import {ViewProps} from 'tweakpane/lib/common/model/view-props';
+import {constrainRange} from 'tweakpane/lib/common/number-util';
 import {
 	PointerHandler,
 	PointerHandlerEvent,
-} from 'tweakpane/lib/plugin/common/view/pointer-handler';
+} from 'tweakpane/lib/common/view/pointer-handler';
 
 import {PluginView} from './view';
 
