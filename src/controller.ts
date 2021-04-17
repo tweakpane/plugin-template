@@ -6,6 +6,7 @@ import {
 	PointerHandler,
 	PointerHandlerEvent,
 } from 'tweakpane/lib/common/view/pointer-handler';
+import {bindDisposed} from 'tweakpane/lib/common/view/reactive';
 
 import {PluginView} from './view';
 
@@ -25,8 +26,13 @@ export class PluginController implements ValueController<number> {
 
 		// Receive the bound value from the plugin
 		this.value = config.value;
+
 		// and also view props
 		this.viewProps = config.viewProps;
+		bindDisposed(this.viewProps, () => {
+			// Called when the controller is disposing
+			console.log('TODO: dispose controller');
+		});
 
 		// Create a custom view
 		this.view = new PluginView(doc, {
@@ -39,11 +45,6 @@ export class PluginController implements ValueController<number> {
 		ptHandler.emitter.on('down', this.onPoint_);
 		ptHandler.emitter.on('move', this.onPoint_);
 		ptHandler.emitter.on('up', this.onPoint_);
-	}
-
-	public onDispose() {
-		// Called when the controller is disposing
-		console.log('TODO: dispose controller');
 	}
 
 	private onPoint_(ev: PointerHandlerEvent) {

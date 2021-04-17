@@ -2,7 +2,10 @@ import {Value} from 'tweakpane/lib/common/model/value';
 import {ViewProps} from 'tweakpane/lib/common/model/view-props';
 import {mapRange} from 'tweakpane/lib/common/number-util';
 import {ClassName} from 'tweakpane/lib/common/view/class-name';
-import {bindClassModifier} from 'tweakpane/lib/common/view/reactive';
+import {
+	bindClassModifier,
+	bindDisposed,
+} from 'tweakpane/lib/common/view/reactive';
 import {View} from 'tweakpane/lib/common/view/view';
 
 interface Config {
@@ -39,11 +42,15 @@ export class PluginView implements View {
 		this.element.appendChild(this.textElem_);
 
 		// Apply the initial value
-		this.update();
+		this.refresh_();
+
+		bindDisposed(config.viewProps, () => {
+			// Called when the view is disposing
+			console.log('TODO: dispose view');
+		});
 	}
 
-	// Use this method to apply the current value to the view
-	public update(): void {
+	private refresh_(): void {
 		const rawValue = this.value_.rawValue;
 
 		this.textElem_.textContent = rawValue.toFixed(2);
@@ -75,12 +82,7 @@ export class PluginView implements View {
 		}
 	}
 
-	public onDispose() {
-		// Called when the view is disposing
-		console.log('TODO: dispose view');
-	}
-
 	private onValueChange_() {
-		this.update();
+		this.refresh_();
 	}
 }
