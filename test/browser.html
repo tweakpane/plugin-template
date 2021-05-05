@@ -11,14 +11,19 @@
 		const params = {
 			prop: 3,
 		};
-		window.pane = new Tweakpane();
+		const pane = new Tweakpane.Pane();
+
+		// Register plugin
+		pane.registerPlugin(TweakpaneTemplatePlugin);
 
 		// TODO: Update parameters for your plugin
-		window.input = window.pane.addInput({test: 3}, 'test', {
+		pane.addInput(params, 'prop', {
 			view: 'dots',
 		}).on('change', (ev) => {
 			console.log(ev.value);
 		});
+
+		window.pane = pane;
 	</script>
 </body>
 </html>

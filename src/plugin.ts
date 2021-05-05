@@ -1,40 +1,71 @@
-import {InputParams} from 'tweakpane/lib/blade/common/api/types';
-import {BindingTarget} from 'tweakpane/lib/common/binding/target';
-import {CompositeConstraint} from 'tweakpane/lib/common/constraint/composite';
 import {
+	BaseInputParams,
+	BindingTarget,
+	CompositeConstraint,
 	createRangeConstraint,
 	createStepConstraint,
-} from 'tweakpane/lib/input-binding/number/plugin';
-import {InputBindingPlugin} from 'tweakpane/lib/input-binding/plugin';
+	InputBindingPlugin,
+	ParamsParsers,
+	parseParams,
+} from '@tweakpane/core';
 
 import {PluginController} from './controller';
 
+interface PluginInputParams extends BaseInputParams {
+	max?: number;
+	min?: number;
+	step?: number;
+	view: 'dots';
+}
+
 // NOTE: You can see JSDoc comments of `InputBindingPlugin` for details about each property
 //
-// `InputBindingPlugin<In, Ex>` means...
+// `InputBindingPlugin<In, Ex, P>` means...
 // - The plugin receives the bound value as `Ex`,
 // - converts `Ex` into `In` and holds it
+// - P is the type of the parsed parameters
 //
-export const TemplateInputPlugin: InputBindingPlugin<number, number> = {
+export const TemplateInputPlugin: InputBindingPlugin<
+	number,
+	number,
+	PluginInputParams
+> = {
 	id: 'input-template',
+
+	// type: The plugin type.
+	// - 'input': Input binding
+	// - 'monitor': Monitor binding
+	type: 'input',
 
 	// This plugin template injects a compiled CSS by @rollup/plugin-replace
 	// See rollup.config.js for details
 	css: '__css__',
 
-	accept(exValue: unknown, params: InputParams) {
+	accept(exValue: unknown, params: Record<string, unknown>) {
 		if (typeof exValue !== 'number') {
 			// Return null to deny the user input
 			return null;
 		}
 
-		// `view` option may be useful to provide a custom control for primitive values
-		if (params.view !== 'dots') {
+		// Parse parameters object
+		const p = ParamsParsers;
+		const result = parseParams<PluginInputParams>(params, {
+			// `view` option may be useful to provide a custom control for primitive values
+			view: p.required.constant('dots'),
+
+			max: p.optional.number,
+			min: p.optional.number,
+			step: p.optional.number,
+		});
+		if (!result) {
 			return null;
 		}
 
-		// Return a typed value to accept the user input
-		return exValue;
+		// Return a typed value and params to accept the user input
+		return {
+			initialValue: exValue,
+			params: result,
+		};
 	},
 
 	binding: {
@@ -59,12 +90,6 @@ export const TemplateInputPlugin: InputBindingPlugin<number, number> = {
 			}
 			// Use `CompositeConstraint` to combine multiple constraints
 			return new CompositeConstraint(constraints);
-		},
-
-		equals: (inValue1: number, inValue2: number) => {
-			// Simply use `===` to compare primitive values,
-			// or a custom comparator for complex objects
-			return inValue1 === inValue2;
 		},
 
 		writer(_args) {
