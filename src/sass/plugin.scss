@@ -1,6 +1,5 @@
-// Import Tweakpane styles
-@import '../../node_modules/tweakpane/lib/sass/defs';
-@import '../../node_modules/tweakpane/lib/sass/view/common/input';
+// Import core styles
+@import '../../node_modules/@tweakpane/core/lib/sass/plugin';
 
 // Additional style for the plugin
 .#{$prefix}-tmpv {
@@ -11,7 +10,7 @@
 	display: grid;
 	grid-template-columns: repeat(10, 1fr);
 	grid-template-rows: repeat(auto-fit, 10px);
-	height: calc(var(--unit-size) * 3);
+	height: calc(var(--bld-us) * 3);
 	overflow: hidden;
 	position: relative;
 
@@ -20,8 +19,8 @@
 	}
 
 	&_text {
-		// You can use CSS variables for styling. See `RootView` declarations for details:
-		// ../../node_modules/tweakpane/lib/sass/view/_root.scss
+		// You can use CSS variables for styling. See declarations for details:
+		// ../../node_modules/@tweakpane/core/lib/sass/_defs.scss
 		color: var(--in-fg);
 
 		bottom: 2px;

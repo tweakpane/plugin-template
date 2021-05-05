@@ -1,12 +1,11 @@
-import {ValueController} from 'tweakpane/lib/common/controller/value';
-import {Value} from 'tweakpane/lib/common/model/value';
-import {ViewProps} from 'tweakpane/lib/common/model/view-props';
-import {constrainRange} from 'tweakpane/lib/common/number-util';
 import {
+	constrainRange,
+	Controller,
 	PointerHandler,
 	PointerHandlerEvent,
-} from 'tweakpane/lib/common/view/pointer-handler';
-import {bindDisposed} from 'tweakpane/lib/common/view/reactive';
+	Value,
+	ViewProps,
+} from '@tweakpane/core';
 
 import {PluginView} from './view';
 
@@ -15,8 +14,8 @@ interface Config {
 	viewProps: ViewProps;
 }
 
-// Custom controller class should implement `ValueController` interface
-export class PluginController implements ValueController<number> {
+// Custom controller class should implement `Controller` interface
+export class PluginController implements Controller<PluginView> {
 	public readonly value: Value<number>;
 	public readonly view: PluginView;
 	public readonly viewProps: ViewProps;
@@ -29,7 +28,7 @@ export class PluginController implements ValueController<number> {
 
 		// and also view props
 		this.viewProps = config.viewProps;
-		bindDisposed(this.viewProps, () => {
+		this.viewProps.handleDispose(() => {
 			// Called when the controller is disposing
 			console.log('TODO: dispose controller');
 		});

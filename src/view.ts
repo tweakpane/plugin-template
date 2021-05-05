@@ -1,12 +1,4 @@
-import {Value} from 'tweakpane/lib/common/model/value';
-import {ViewProps} from 'tweakpane/lib/common/model/view-props';
-import {mapRange} from 'tweakpane/lib/common/number-util';
-import {ClassName} from 'tweakpane/lib/common/view/class-name';
-import {
-	bindClassModifier,
-	bindDisposed,
-} from 'tweakpane/lib/common/view/reactive';
-import {View} from 'tweakpane/lib/common/view/view';
+import {ClassName, mapRange, Value, View, ViewProps} from '@tweakpane/core';
 
 interface Config {
 	value: Value<number>;
@@ -29,7 +21,7 @@ export class PluginView implements View {
 		this.element = doc.createElement('div');
 		this.element.classList.add(className());
 		// Bind view props to the element
-		bindClassModifier(config.viewProps, this.element);
+		config.viewProps.bindClassModifiers(this.element);
 
 		// Receive the bound value from the controller
 		this.value_ = config.value;
@@ -44,7 +36,7 @@ export class PluginView implements View {
 		// Apply the initial value
 		this.refresh_();
 
-		bindDisposed(config.viewProps, () => {
+		config.viewProps.handleDispose(() => {
 			// Called when the view is disposing
 			console.log('TODO: dispose view');
 		});
