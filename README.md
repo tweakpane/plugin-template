@@ -52,10 +52,10 @@ TODO: Delete this section before publishing your plugin.
 ### Package
 ```js
 import {Pane} from 'tweakpane';
-import * as TweakpaneTemplatePlugin from 'tweakpane-plugin-template';
+import * as TemplatePlugin from 'tweakpane-plugin-template';
 
 const pane = new Pane();
-pane.registerPlugin(TweakpaneTemplatePlugin);
+pane.registerPlugin(TemplatePlugin);
 ```
 
 
@@ -65,11 +65,8 @@ const params = {
   prop: 3,
 };
 
-const pane = new Tweakpane();
-pane.registerPlugin(TweakpaneTemplatePlugin);
-
 // TODO: Update parameters for your plugin
-pane.addInput({test: 3}, 'test', {
+pane.addInput(params, 'prop', {
   view: 'dots',
 }).on('change', (ev) => {
   console.log(ev.value);
