@@ -41,7 +41,7 @@ TODO: Delete this section before publishing your plugin.
 ### Browser
 ```html
 <script src="tweakpane.min.js"></script>
-<scirpt src="tweakpane-plugin-template.min.js"></script>
+<script src="tweakpane-plugin-template.min.js"></script>
 <script>
   const pane = new Tweakpane.Pane();
   pane.registerPlugin(TweakpaneTemplatePlugin);
