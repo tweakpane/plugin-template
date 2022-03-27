@@ -11,7 +11,7 @@ import {
 
 import {PluginController} from './controller';
 
-interface PluginInputParams extends BaseInputParams {
+export interface PluginInputParams extends BaseInputParams {
 	max?: number;
 	min?: number;
 	step?: number;

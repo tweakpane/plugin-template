@@ -1,4 +1,4 @@
 import {TemplateInputPlugin} from './plugin';
 
-// Export your plugin as constant `plugin`
-export const plugin = TemplateInputPlugin;
+// Export your plugin(s) as constant `plugins`
+export const plugins = [TemplateInputPlugin];
