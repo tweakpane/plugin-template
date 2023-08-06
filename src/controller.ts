@@ -7,7 +7,7 @@ import {
 	ViewProps,
 } from '@tweakpane/core';
 
-import {PluginView} from './view';
+import {PluginView} from './view.js';
 
 interface Config {
 	value: Value<number>;

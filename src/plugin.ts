@@ -2,14 +2,14 @@ import {
 	BaseInputParams,
 	BindingTarget,
 	CompositeConstraint,
+	createPlugin,
 	createRangeConstraint,
 	createStepConstraint,
 	InputBindingPlugin,
-	ParamsParsers,
-	parseParams,
+	parseRecord,
 } from '@tweakpane/core';
 
-import {PluginController} from './controller';
+import {PluginController} from './controller.js';
 
 export interface PluginInputParams extends BaseInputParams {
 	max?: number;
@@ -18,7 +18,7 @@ export interface PluginInputParams extends BaseInputParams {
 	view: 'dots';
 }
 
-// NOTE: You can see JSDoc comments of `InputBindingPlugin` for details about each property
+// NOTE: JSDoc comments of `InputBindingPlugin` can be useful to know details about each property
 //
 // `InputBindingPlugin<In, Ex, P>` means...
 // - The plugin receives the bound value as `Ex`,
@@ -29,17 +29,14 @@ export const TemplateInputPlugin: InputBindingPlugin<
 	number,
 	number,
 	PluginInputParams
-> = {
+> = createPlugin({
 	id: 'input-template',
 
 	// type: The plugin type.
 	// - 'input': Input binding
 	// - 'monitor': Monitor binding
+	// - 'blade': Blade without binding
 	type: 'input',
-
-	// This plugin template injects a compiled CSS by @rollup/plugin-replace
-	// See rollup.config.js for details
-	css: '__css__',
 
 	accept(exValue: unknown, params: Record<string, unknown>) {
 		if (typeof exValue !== 'number') {
@@ -48,15 +45,14 @@ export const TemplateInputPlugin: InputBindingPlugin<
 		}
 
 		// Parse parameters object
-		const p = ParamsParsers;
-		const result = parseParams<PluginInputParams>(params, {
+		const result = parseRecord<PluginInputParams>(params, (p) => ({
 			// `view` option may be useful to provide a custom control for primitive values
 			view: p.required.constant('dots'),
 
 			max: p.optional.number,
 			min: p.optional.number,
 			step: p.optional.number,
-		});
+		}));
 		if (!result) {
 			return null;
 		}
@@ -108,4 +104,4 @@ export const TemplateInputPlugin: InputBindingPlugin<
 			viewProps: args.viewProps,
 		});
 	},
-};
+});

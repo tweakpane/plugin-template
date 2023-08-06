@@ -5,19 +5,20 @@
 	<title></title>
 </head>
 <body>
-	<script src="../node_modules/tweakpane/dist/tweakpane.js"></script>
-	<script src="../dist/tweakpane-plugin-template.js"></script>
-	<script>
+	<script type="module">
+		import {Pane} from '../node_modules/tweakpane/dist/tweakpane.min.js';
+		import * as TweakpaneTemplatePlugin from '../dist/tweakpane-plugin-template.js';
+
 		const params = {
 			prop: 3,
 		};
-		const pane = new Tweakpane.Pane();
 
+		const pane = new Pane();
 		// Register plugin
 		pane.registerPlugin(TweakpaneTemplatePlugin);
 
 		// TODO: Update parameters for your plugin
-		pane.addInput(params, 'prop', {
+		pane.addBinding(params, 'prop', {
 			view: 'dots',
 		}).on('change', (ev) => {
 			console.log(ev.value);
