@@ -40,10 +40,11 @@ TODO: Delete this section before publishing your plugin.
 
 ### Browser
 ```html
-<script src="tweakpane.min.js"></script>
-<script src="tweakpane-plugin-template.min.js"></script>
-<script>
-  const pane = new Tweakpane.Pane();
+<script type="module">
+  import {Pane} as Tweakpane from './tweakpane.min.js';
+  import * as TweakpaneTemplatePlugin from './tweakpane-plugin-template.min.js';
+
+  const pane = new Pane();
   pane.registerPlugin(TweakpaneTemplatePlugin);
 </script>
 ```
@@ -72,6 +73,14 @@ pane.addInput(params, 'prop', {
   console.log(ev.value);
 });
 ```
+
+
+## Version compatibility
+
+| Tweakpane | plugin-template |
+| --------- | --------------- |
+| 4.x       | [main](https://github.com/tweakpane/plugin-template/tree/main) |
+| 3.x       | [v3](https://github.com/tweakpane/plugin-template/tree/v3) |
 
 
 [tweakpane]: https://github.com/cocopon/tweakpane/
