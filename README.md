@@ -32,6 +32,14 @@ TODO: Delete this section before publishing your plugin.
 ```
 
 
+## Version compatibility
+
+| Tweakpane | plugin-template |
+| --------- | --------------- |
+| 4.x       | [main](https://github.com/tweakpane/plugin-template/tree/main) |
+| 3.x       | [v3](https://github.com/tweakpane/plugin-template/tree/v3) |
+
+
 # For plugin users
 
 
@@ -73,14 +81,6 @@ pane.addInput(params, 'prop', {
   console.log(ev.value);
 });
 ```
-
-
-## Version compatibility
-
-| Tweakpane | plugin-template |
-| --------- | --------------- |
-| 4.x       | [main](https://github.com/tweakpane/plugin-template/tree/main) |
-| 3.x       | [v3](https://github.com/tweakpane/plugin-template/tree/v3) |
 
 
 [tweakpane]: https://github.com/cocopon/tweakpane/
